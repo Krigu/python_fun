@@ -1,2 +1,2 @@
 # pyton_fun
-Some small python challanges
+Some small python challenges
