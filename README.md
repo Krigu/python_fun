@@ -1,2 +1,2 @@
-# pyton_fun
+# python_fun
 Some small python challenges
