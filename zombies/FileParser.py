@@ -7,7 +7,7 @@ class ZombieParser:
         self.__result = []
         self.parse_file(file_name)
 
-    def add_to_array(self, char):
+    def add_to_list(self, char):
         self.__result.append(char)
 
     def increment_last_positiom(self, incremend_by):
@@ -18,7 +18,7 @@ class ZombieParser:
         if content.startswith("kill zombie ->"):
             m = re.search("->\W?(\w)", content)
             c = m.groups()[0]
-            self.add_to_array(c)
+            self.add_to_list(c)
         if content.startswith("clean chainsaw"):
             self.increment_last_positiom(-3)
         if content.startswith("grab brain"):
