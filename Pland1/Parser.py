@@ -13,7 +13,7 @@ def parse():
     actions = {"U": (lambda: map_x[x], lambda j: j > y),
                "D": (lambda: map_x[x], lambda j: j < y),
                "L": (lambda: map_y[y], lambda j: j < x),
-               "R": (lambda: map_y[y], lambda j: j > x), }
+               "R": (lambda: map_y[y], lambda j: j > x) }
 
     for x in range(1, 8):
         file_name = "%02d" % x
