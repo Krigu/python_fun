@@ -3,13 +3,18 @@ from collections import defaultdict
 
 def check_for_hits(planets, counts):
     total = 0
-    for planet in planets:
+    for planet in planets():
         if counts(planet):
             total += 1
     return total
 
 
 def parse():
+    actions = {"U": (lambda: map_x[x], lambda j: j > y),
+               "D": (lambda: map_x[x], lambda j: j < y),
+               "L": (lambda: map_y[y], lambda j: j < x),
+               "R": (lambda: map_y[y], lambda j: j > x), }
+
     for x in range(1, 8):
         file_name = "%02d" % x
         input_file = open(file_name + ".in")
@@ -28,19 +33,15 @@ def parse():
         start = int(planets) + 1
         hit_list = []
         for i in range(start, start + int(ships)):
-            hits = 0
+
             x, y, direction = lines[i].split(" ")
             x, y = int(x), int(y)
-            if direction == "U":
-                hits += check_for_hits(map_x[x], lambda j: j > y)
-            elif direction == "D":
-                hits += check_for_hits(map_x[x], lambda j: j < y)
-            elif direction == "L":
-                hits += check_for_hits(map_y[y], lambda j: j < x)
-            elif direction == "R":
-                hits += check_for_hits(map_y[y], lambda j: j > x)
-            else:
+
+            action = actions[direction]
+            if not action:
                 raise "Invalid direction value %s" % direction
+
+            hits = check_for_hits(action[0], action[1])
             hit_list.append(hits)
 
         output_file = open(file_name + ".out")
