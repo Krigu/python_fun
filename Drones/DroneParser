@@ -1,0 +1,17 @@
+for x in range(1, 7):
+    file_name = "%02d" % x
+    input_file = open(file_name + ".in")
+    lines = input_file.read().splitlines()
+
+    header = lines[0].split(" ")
+    mod = header[1]
+    count = 0
+    for amount in lines[1:]:
+        count += int(amount)
+
+    output_file = open(file_name + ".out")
+    should_be = output_file.readlines()[0]
+
+    result = count % int(mod)
+    print("Result: %s expected: %s" % (str(result), should_be))
+    assert str(result) == should_be
